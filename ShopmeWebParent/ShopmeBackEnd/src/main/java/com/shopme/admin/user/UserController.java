@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +30,7 @@ public class UserController {
 	@GetMapping("/users")
 	public String listFirstPage(Model model) {
 		
-		return listByPage(1, model);
+		return listByPage(1, model,null);
 	}
 
 	@GetMapping("/users/new")
@@ -45,8 +46,8 @@ public class UserController {
 	}
 	
 	@GetMapping("/users/page/{pageNum}")
-	public String listByPage(@PathVariable("pageNum")int pageNum, Model model) {
-		Page<User> page = userService.listByPage(pageNum);
+	public String listByPage(@PathVariable("pageNum")int pageNum, Model model,@Param("keyword") String keyword) {
+		Page<User> page = userService.listByPage(pageNum, keyword );
 		List<User> listUsers = page.getContent();
 
 		long totalItem = page.getTotalElements();
@@ -56,7 +57,7 @@ public class UserController {
 		model.addAttribute("totalItem", totalItem);
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("listUsers", listUsers);
-		
+		model.addAttribute("keyword", keyword);
 		
 		return "users";
 	}
@@ -83,7 +84,9 @@ public class UserController {
 		
 		redirectAttributes.addFlashAttribute("message", "User have been saved");
 
-		return "redirect:/users";
+		String emailSplit = user.getEmail().split("@")[0];
+		
+		return "redirect:/users/page/1?keyword=" + emailSplit;
 	}
 
 	@GetMapping("/users/edit/{id}")

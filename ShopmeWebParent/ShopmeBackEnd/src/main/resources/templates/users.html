@@ -65,6 +65,15 @@
 		<h2>Manage Users</h2>
 		<a th:href="@{/users/new}">Create new user</a>
 		<div th:if="${message != mull}" class="alert alert-success text-center">[[${message}]]</div>
+		
+		<form th:action="@{/users/page/1}" >
+		<div class="input-group">
+  			<div class="form-outline">
+    			<input type="search" name="keyword" class="form-control" />
+  			</div>
+  				<input type="submit" value="Search" class="btn btn-primary">
+		</div>
+		</form>
 		<div>
 			<table class="table table-bordered table-striped table-hover table-responsive-xl">
 				<thead class="thead-dark">
@@ -116,8 +125,7 @@
 					[[${i}]] </a> <span th:unless="${i != pageNum}">[[${i}]] </span>
 				&nbsp;&nbsp;
 			</span>
-		</div>
-	</div>
+</div>
 <!-- 		<div class="modal fade text-center" id="confirmModal">
 			<div class="modal-dialog">
 				<div class="modal-content">
