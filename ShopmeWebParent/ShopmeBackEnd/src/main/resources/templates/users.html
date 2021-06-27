@@ -82,7 +82,10 @@
 				<tbody>
 					<tr th:each="user: ${listUsers}">
 						<td>[[${user.id}]]</td>
-						<td><span class="fal fa-id-badge"></span></td>
+						<td>
+							<span th:if="${user.photos == null}" class="fal fa-id-badge"></span>
+							<img th:if="${user.photos != null}" th:src="@{${user.getImg}}" width="100px"> 
+						</td>
 						<td>[[${user.email}]]</td>
 						<td>[[${user.firstName}]]</td>
 						<td>[[${user.lastName}]]</td>
