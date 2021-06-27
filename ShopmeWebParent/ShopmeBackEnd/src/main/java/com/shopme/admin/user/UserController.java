@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,11 +27,9 @@ public class UserController {
 	UserService userService;
 
 	@GetMapping("/users")
-	public String listAll(Model model) {
-		List<User> listUsers = userService.listAll();
-		model.addAttribute("listUsers", listUsers);
-
-		return "users";
+	public String listFirstPage(Model model) {
+		
+		return listByPage(1, model);
 	}
 
 	@GetMapping("/users/new")
@@ -43,6 +42,23 @@ public class UserController {
 		model.addAttribute("pageTitle", "Create New User");
 
 		return "user_form";
+	}
+	
+	@GetMapping("/users/page/{pageNum}")
+	public String listByPage(@PathVariable("pageNum")int pageNum, Model model) {
+		Page<User> page = userService.listByPage(pageNum);
+		List<User> listUsers = page.getContent();
+
+		long totalItem = page.getTotalElements();
+		int totalPage = page.getTotalPages();
+		
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("totalItem", totalItem);
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("listUsers", listUsers);
+		
+		
+		return "users";
 	}
 
 	@PostMapping("/users/save")
