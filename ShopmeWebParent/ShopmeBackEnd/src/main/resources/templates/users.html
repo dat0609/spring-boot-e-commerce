@@ -63,7 +63,9 @@
 		</div>
 	
 		<h2>Manage Users</h2>
-		<a th:href="@{/users/new}">Create new user</a>
+		<a th:href="@{/users/new}" class="fas fa-user-plus"></a>
+		&nbsp;|
+		<a th:href="@{/users/export/csv}">Export to CSV</a>
 		<div th:if="${message != mull}" class="alert alert-success text-center">[[${message}]]</div>
 		
 		<form th:action="@{/users/page/1}" >
