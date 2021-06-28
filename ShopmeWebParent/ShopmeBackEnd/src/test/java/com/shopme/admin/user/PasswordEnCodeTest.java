@@ -9,7 +9,7 @@ public class PasswordEnCodeTest {
 	public void testPasswordEncode() {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		
-		String rawPassString = "dat";
+		String rawPassString = "123";
 		
 		String encode = passwordEncoder.encode(rawPassString);
 		System.out.println(encode);

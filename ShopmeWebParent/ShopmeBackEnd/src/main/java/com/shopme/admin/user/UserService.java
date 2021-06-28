@@ -106,5 +106,25 @@ public class UserService {
 		userRepository.enableUser(id, enable);
 	}
 	
+	public User getByEmail(String email) {
+		return userRepository.getUserByEmail(email);
+	}
 	
+	public User updateAccount(User userInForm) {
+		 User userInBD = userRepository.findById(userInForm.getId()).get();
+		 
+		 if (!userInForm.getPassword().isEmpty()) {
+			userInBD.setPassword(userInForm.getPassword());
+			encodePassword(userInBD);
+		}
+		
+		 if (userInForm.getPhotos() != null) {
+			userInBD.setPhotos(userInForm.getPhotos());
+		}
+		 
+		userInBD.setFirstName(userInForm.getFirstName());
+		userInBD.setLastName(userInForm.getLastName());
+		
+		return userRepository.save(userInBD);
+	}
 }
