@@ -10,14 +10,21 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer{
 
+	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		String dirName = "user-photos";
-		Path userPhotoDir = Paths.get(dirName);
+		exposeDirectory("user-photos",registry);
+		exposeDirectory("../product-images",registry);
+
+	}
+
+	private void exposeDirectory(String pathPattern, ResourceHandlerRegistry registry) {
+		Path path = Paths.get(pathPattern);
+		String absolutePath = path.toFile().getAbsolutePath();
 		
-		String userPhoto = userPhotoDir.toFile().getAbsolutePath();
+		String logicalPath = pathPattern.replace("../", "") + "/**";
 		
-		registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file:/" + userPhoto + "/");
+		registry.addResourceHandler(logicalPath).addResourceLocations("file:/" +absolutePath + "/");
 	}
 
 }
