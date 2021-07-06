@@ -1,10 +1,103 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+<!-- molla/index.html  22 Nov 2019 09:54:33 GMT -->
 <head>
-<meta charset="ISO-8859-1">
-<title>Welcome to Shopme</title>
-</head>
-<body>
-<h1>Welcome to Shopme Commerce</h1>
-</body>
+		<script type="text/javascript">
+			if (top !== window) {
+				top.location.href = window.location.href;
+			}
+			if (window.location.hash) {
+				window.location.href = window.location.href.replace(window.location.hash, '');
+			}
+		</script>
+		<!-- Basic -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<title>Shopme</title>
+
+		<meta name="author" content="p-Themes">
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="https://www.portotheme.com/html/molla/assets/images/demos-img/favicon.ico" type="image/x-icon" />
+		<link rel="apple-touch-icon" href="../../../www.portotheme.com/html/molla/assets/images/demos-img/apple-touch-icon.html">
+
+		<!-- Mobile Metas -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+		<!-- Web Fonts  -->
+		<link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800" rel="stylesheet" type="text/css">
+
+		<!-- Vendor CSS -->
+		<link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
+
+		<!-- Theme CSS -->
+		<link rel="stylesheet" href="assets/css/main.min.css">
+		<head th:replace="fragments :: page_head('Shopme - Home page','none')"></head>
+		
+	</head>
+	<body>
+		<div class="page-wrapper">
+					
+			<div th:replace ="nav_bar :: header_menu">
+			</div>
+			
+			<div id="main">
+
+				<section class="section section-demos text-center container-lg">
+					<form th:action="@{/page/1}" >
+						<div class="input-group">
+				  			<div class="form-outline">
+				    			<input type="search" name="keyword" class="form-control" />
+				  			</div>
+				  				<input type="submit" value="Search" class="btn btn-primary">
+						</div>
+					</form>
+					<h2>20 Pre-Build Demos</h2>
+					<p>Comes with 20 homepages available with multi style that better for your choice.<br>Molla store is one of the best Multi-Purpose eCommerce HTML Template for your store.</p>
+					<div class="demo-filter menu">
+						
+					</div>
+					<div class="row demos">
+						<div class="iso-item col-sm-6 col-md-4 col-lg-3 homepages" th:each="product : ${listEnableProduct}">
+								<img th:src="@{${product.getImg}}">
+								<h5><a th:href="@{'product/' + ${product.id}}">[[${product.name}]]</a></h5>
+								<h6>[[${product.price}]]</h6>
+								<h6>[[${product.alias}]]</h6>
+								<h6>[[${product.shortDescription}]]</h6>
+						</div>
+						
+						
+					</div>
+<div class="text-center">
+				Total Product : [[${totalItem}]] - Page [[${pageNum}]] of
+				[[${totalPage}]] &nbsp;  
+			<span
+				th:each="i: ${#numbers.sequence(1, totalPage)}"> <a
+				th:if="${i != pageNum}" th:href="@{'/page/' +${i}}">
+					[[${i}]] </a> <span th:unless="${i != pageNum}">[[${i}]] </span>
+				&nbsp;&nbsp;
+			</span>
+</div>
+					<h5 class="text-load-more">More New Demos Coming Soon ...</h5>
+				</section>
+			</div>
+			
+		</div>
+		<!-- Mobile Menu -->
+		<div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+
+		<!-- Vendor -->
+		<script src="lib/jquery/jquery.min.js"></script>
+		<script src="lib/jquery.appear/jquery.appear.min.js"></script>
+		<!--<script src="lib/popper/umd/popper.min.js"></script>-->
+		<script src="lib/jquery.lazyload/jquery.lazyload.min.js"></script>
+		<script src="lib/isotope/jquery.isotope.min.js"></script>
+		
+		<!-- Theme Base, Components and Settings -->
+		<script src="assets/main.js"></script>
+	</body>
+
 </html>

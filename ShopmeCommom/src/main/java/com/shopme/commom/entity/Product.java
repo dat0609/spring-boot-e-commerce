@@ -65,4 +65,12 @@ public class Product {
 		}
 		return "/product-images/" + this.id + "/" + this.image;
 	}
+	
+	public Product(int id) {
+		this.id = id;
+	}
+	
+	public Product() {
+		
+	}
 }

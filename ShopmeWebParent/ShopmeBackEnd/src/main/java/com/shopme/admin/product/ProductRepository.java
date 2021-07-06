@@ -18,4 +18,8 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, I
 	
 	@Query("Select p From Product p Where p.name Like %?1%")
 	public Page<Product> findAll(String keyword, Pageable pageable);
+	
+	@Query("Update Product p Set p.inStock = ?2 Where p.id = ?1")
+	@Modifying
+	public void UpdateInstockProduct(Integer id,boolean inStocl);
 }

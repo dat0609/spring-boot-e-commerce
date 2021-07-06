@@ -33,6 +33,7 @@
 						<th>Image</th>
 						<th>Name</th>
 						<th>Enable</th>
+						<th>InStock</th>
 						<th  sec:authorize="hasAnyAuthority('Admin', 'Editor')" ></th>
 					</tr>	
 				</thead>
@@ -47,7 +48,10 @@
 							<a th:if="${product.enable == true}" class="fal fa-check-circle" th:href="@{'/products/' + ${product.id} + '/enable/false'}"></a>
 							<a th:if="${product.enable == false}" class="fal fa-times-circle" th:href="@{'/products/' + ${product.id} + '/enable/true'}"></a>
 						</td>
-						
+						<td >
+							<a th:if="${product.inStock == true}" class="fal fa-check-circle" th:href="@{'/products/' + ${product.id} + '/inStock/false'}"></a>
+							<a th:if="${product.inStock == false}" class="fal fa-times-circle" th:href="@{'/products/' + ${product.id} + '/inStock/true'}"></a>
+						</td>						
 						<td  sec:authorize="hasAnyAuthority('Admin', 'Editor')" >
 							<a class="fas fa-user-edit" th:href="@{'/products/edit/' + ${product.id}}">Edit</a>
 						&nbsp; 

@@ -20,9 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shopme.admin.FileUploadUtil;
-import com.shopme.admin.user.UserCsvExporter;
 import com.shopme.commom.entity.Product;
-import com.shopme.commom.entity.User;
 
 @Controller
 public class ProductController {
@@ -134,5 +132,16 @@ public class ProductController {
 		ProductCsvExporter  exporter = new ProductCsvExporter();
 		
 		exporter.export(listProducts, response);
+	}
+	
+	@GetMapping("/products/{id}/inStock/{status}")
+	public String updateInstocProduct(@PathVariable("id")Integer id,@PathVariable("status") boolean inStock,RedirectAttributes redirectAttributes) {
+		
+		service.updateStockProduct(id, inStock);
+		String msg = inStock ? "In Stock" : "Out of Stock";
+		
+		redirectAttributes.addFlashAttribute("message", msg);
+		
+		return "redirect:/products";
 	}
 }

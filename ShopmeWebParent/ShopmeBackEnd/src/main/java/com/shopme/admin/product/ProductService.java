@@ -17,7 +17,7 @@ import com.shopme.commom.entity.Product;
 @Transactional
 public class ProductService {
 
-	private static final int PRODUCT_PER_PAGE = 1;
+	private static final int PRODUCT_PER_PAGE = 10;
 
 	@Autowired
 	ProductRepository productRepository;
@@ -62,5 +62,9 @@ public class ProductService {
 	
 	public Product get(Integer id) {
 		return productRepository.findById(id).get();
+	}
+	
+	public void updateStockProduct(Integer id, boolean inStock) {
+		 productRepository.UpdateInstockProduct(id, inStock);
 	}
 }
