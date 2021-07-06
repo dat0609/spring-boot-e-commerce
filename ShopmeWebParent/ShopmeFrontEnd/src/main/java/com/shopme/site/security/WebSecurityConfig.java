@@ -59,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/", "/account_detail").authenticated()
+			.antMatchers("/", "/account_detail","/product/**","/cart").authenticated()
 			.anyRequest().permitAll()
 			.and()
 				.formLogin().loginPage("/login").usernameParameter("email").defaultSuccessUrl("/").permitAll()

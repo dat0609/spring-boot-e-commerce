@@ -115,6 +115,9 @@ public class CustomerService {
 
 	public String getEmailOfAuthenticatedCustomer(HttpServletRequest request) {
 		Object principal = request.getUserPrincipal();
+
+		if (principal == null) return null;
+		
 		String email = null;
 
 		if (principal instanceof UsernamePasswordAuthenticationToken
