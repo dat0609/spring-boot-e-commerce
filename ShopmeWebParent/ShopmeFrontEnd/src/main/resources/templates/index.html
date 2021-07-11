@@ -62,7 +62,7 @@
 					<div class="row demos">
 						<div class="iso-item col-sm-6 col-md-4 col-lg-3 homepages" th:each="product : ${listEnableProduct}">
 								<img th:src="@{${product.getImg}}">
-								<h5><a th:href="@{'product/' + ${product.id}}">[[${product.name}]]</a></h5>
+								<h5><a th:href="@{'/product/' + ${product.id}}">[[${product.name}]]</a></h5>
 								<h6>[[${product.price}]]</h6>
 								<h6>[[${product.alias}]]</h6>
 								<h6>[[${product.shortDescription}]]</h6>

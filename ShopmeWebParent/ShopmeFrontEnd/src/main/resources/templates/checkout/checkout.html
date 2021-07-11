@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<head th:replace="fragments :: page_head('Shopme - Shopping Cart','none')"></head>
+</head>
+<body>
+    <div class="page-wrapper">
+    <div th:replace ="nav_bar :: header_menu"></div>
+
+	<div class="text-center"><h2>Check Out</h2></div>
+	
+		<div class="row m-1">
+			
+			<div class="col-sm-8">
+			<form th:action="@{place_order}" method="post">
+				<div class="card">
+					<div class="card-header">Shipping information</div>
+					<div class="card-body">
+						<p>
+							<b>Ship to:</b> <input type="text" name="address">
+						</p>
+						<p>
+							<b>Name:</b>    <input type="text" name="name">
+						</p>
+						<p>
+							<b>Phone:</b>    <input type="number" name="phone">
+						</p>
+						<p>
+							<b>Order date: </b> [[${#dates.format(checkoutInfo.deliverDate, 'E, dd MMM yyyy')}]]
+						</p>
+						<p>
+							
+						</p>
+					</div>
+				</div>
+				
+				<div class="card mt-3 mb-3">
+					<div class="card-header">Payment Method</div>
+					<div class="card-body">
+						<div>
+						
+							<p>
+								<input type="radio" id="radioCOD" value="COD" name="COD"> Cash on delivery
+								&nbsp;
+								<button class="btn btn-primary d-none" id="btnCOD" type="submit">Place Order with COD</button>
+							</p> 
+							
+						</div>
+					</div>
+				</div>
+				</form>
+			</div>
+			
+			<div class="col-sm-4">
+				<div class="card">
+					<div class="card-header">Order information</div>
+					<div class="card-body">
+						<div>
+							<table>
+								<th:block th:each="item : ${list}">
+									<tr>
+										<td>[[${item.quantity}]] X &nbsp;&nbsp;</td>
+										<td width="70%">
+											<a th:href="@{'product/' + ${item.product.id}}" target="_blank">[[${item.product.name}]]</a>
+										</td>
+										<td>
+											[[${item.product.price * item.quantity}]]
+										</td>
+									</tr>
+
+								</th:block>
+									<tr>
+										<td colspan="3"><hr/></td>
+																		
+									</tr>
+							</table>
+						</div>
+						
+						<div class="row mt-2">
+							<div class="col">Product Total: </div>
+							<div class="col">[[${checkoutInfo.productTotal}]]</div>
+						</div>
+						<div class="row mt-2">
+							<div class="col">Shipping Total: </div>
+							<div class="col">[[${checkoutInfo.shippingCost}]]</div>
+						</div>
+						<div class="row mt-2">
+							<div class="col"><b>Total:</b> </div>
+							<div class="col">[[${checkoutInfo.paymentTotal}]]</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	
+	</div>
+<div th:replace="nav_bar :: footer_menu"></div>  
+<script type="text/javascript">
+    	contextPath = "[[@{/}]]"
+    	var csrfHeaderName = "[[${_csrf.headerName}]]"
+    	var csrfValue = "[[${_csrf.token}]]"
+    	$(document).ready(function() {
+    		$("#radioCOD").on("click", function() {
+    			$("#btnCOD").removeClass("d-none")
+    		})
+    	})
+</script>
+</body>
+</html>

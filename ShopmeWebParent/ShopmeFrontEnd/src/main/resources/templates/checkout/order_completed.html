@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<head th:replace="fragments :: page_head('Shopme - Shopping Cart','none')"></head>
+</head>
+<body>
+    <div class="page-wrapper">
+    <div th:replace ="nav_bar :: header_menu"></div>
+
+	<div class="text-center"><h2>Order has been completed</h2>
+		<p>Kindly check your email to see more information</p>
+		<p><a th:href="@{/}">Continue shopping</a></p>
+	</div>
+	</div>
+<div th:replace="nav_bar :: footer_menu"></div>  
+
+</body>
+</html>

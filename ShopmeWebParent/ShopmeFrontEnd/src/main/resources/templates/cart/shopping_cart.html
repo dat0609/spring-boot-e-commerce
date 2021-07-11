@@ -51,7 +51,9 @@
 				<h4><span id="total">[[${total}]]</span></h4>	
 			</div>
 			<div class="mt-2">
-				<button class="btn btn-danger p-3 mt-2">Check Out</button>
+				<form th:action="@{/checkout}" method="get">
+					<button class="btn btn-danger p-3 mt-2" type="submit">Check Out</button>
+				</form>
 			</div>
 		</div>
 	</div>
