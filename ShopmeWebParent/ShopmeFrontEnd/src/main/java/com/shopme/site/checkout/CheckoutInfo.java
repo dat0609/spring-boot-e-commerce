@@ -1,5 +1,6 @@
 package com.shopme.site.checkout;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 public class CheckoutInfo {
@@ -48,6 +49,11 @@ public class CheckoutInfo {
 
 	public void setDeliverDate(Date deliverDate) {
 		this.deliverDate = deliverDate;
+	}
+	
+	public String getPaymentTotalPaypal() {
+		DecimalFormat format = new DecimalFormat("###.#");
+		return format.format(paymentTotal);
 	}
 
 }

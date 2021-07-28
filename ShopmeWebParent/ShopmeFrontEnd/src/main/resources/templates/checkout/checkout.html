@@ -47,6 +47,9 @@
 							</p> 
 							
 						</div>
+						<div id="paypal-button-container">
+						
+						</div>
 					</div>
 				</div>
 				</form>
@@ -97,6 +100,31 @@
 	
 	</div>
 <div th:replace="nav_bar :: footer_menu"></div>  
+<script th:src="@{https://www.paypal.com/sdk/js?client-id=Ad_SlHOGbY-QU-gJA4oYCXfml_fjy24dZ0qCrcVb01uZ4LIz4qVv-RFHP82uCTP-iixmMKsHfB2beL9F}"></script>
+<script>
+  paypal.Buttons({
+/*     createOrder: function(data, actions) {
+      // This function sets up the details of the transaction, including the amount and line item details.
+       return actions.order.create({
+    	
+        purchase_units: [{	
+          amount: {
+            value: '0.1'
+          }
+        }]
+      });
+    },
+    opApprove: function(data, actions) {
+    		
+    },
+    onCancel: function(data) {
+    	
+    },
+    onError: function(err) {
+    	alert("error")
+    }  */
+  }).render('#paypal-button-container');
+</script>
 <script type="text/javascript">
     	contextPath = "[[@{/}]]"
     	var csrfHeaderName = "[[${_csrf.headerName}]]"
@@ -106,6 +134,9 @@
     			$("#btnCOD").removeClass("d-none")
     		})
     	})
+    	
+	var eurTotal = "[[${checkoutInfo.getPaymentTotalPaypal}]]";
+
 </script>
 </body>
 </html>

@@ -42,6 +42,7 @@ public class CheckoutController {
 		
 		CheckoutInfo checkoutInfo = checkoutService.prepareCheckout(list);
 		
+		model.addAttribute("customer", customer);
 		model.addAttribute("checkoutInfo", checkoutInfo);
 		model.addAttribute("list", list);	
 		
